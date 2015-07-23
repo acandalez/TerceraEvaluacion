@@ -1,0 +1,60 @@
+body{
+	text-align: center;
+}
+
+#marco {
+	width : 80%;
+	height : 600px;
+	opacity: 1;
+	display: block;
+	margin:100px auto auto auto;
+	
+	
+}
+#divBoton {
+	width: 100%;
+	height:150px;
+	display: block;
+	margin:50px;
+}
+#botonInicio{
+	width: 150px;
+	height: 50px;
+/* 	margin-top: 20px; */
+}
+div {
+    width: 20%;
+    border-radius: 15px;
+    height : 150px;
+
+}
+
+ div:hover  {
+	opacity: 0.8;
+}
+
+.fila1{
+	float:left;
+/*     background-color: grey; */
+    display: table-row-group;
+	
+}
+
+.fila2{
+	float:left;
+/* 	background-color: brown; */
+	display: table-row-group;
+	
+}
+
+.fila3{
+	float:left;
+/* 	background-color: orange; */
+	display: table-row-group;
+}
+
+.fila4{
+	float:left;
+/* 	background-color: #004040; */
+	display: table-row-group;
+}
