@@ -1,5 +1,11 @@
 body{
 	text-align: center;
+	background-image: url('mosaic.png');
+	
+}
+
+h1 {
+	color:white;
 }
 
 #marco {
@@ -9,28 +15,81 @@ body{
 	display: block;
 	margin:100px auto auto auto;
 	
-	
 }
+
+.btn1 {
+  background: #02558c;
+  background-image: -webkit-linear-gradient(top, #02558c, #363c40);
+  background-image: -moz-linear-gradient(top, #02558c, #363c40);
+  background-image: -ms-linear-gradient(top, #02558c, #363c40);
+  background-image: -o-linear-gradient(top, #02558c, #363c40);
+  background-image: linear-gradient(to bottom, #02558c, #363c40);
+  -webkit-border-radius: 16;
+  -moz-border-radius: 16;
+  border-radius: 16px;
+  font-family: Arial;
+  color: #ffffff;
+  font-size: 35px;
+  padding: 30px 30px 30px 30px;
+  border: solid #1f628d 0px;
+  text-decoration: none;
+}
+
+.btn1:hover {
+  background: #1c0202;
+  background-image: -webkit-linear-gradient(top, #1c0202, #8296a3);
+  background-image: -moz-linear-gradient(top, #1c0202, #8296a3);
+  background-image: -ms-linear-gradient(top, #1c0202, #8296a3);
+  background-image: -o-linear-gradient(top, #1c0202, #8296a3);
+  background-image: linear-gradient(to bottom, #1c0202, #8296a3);
+  text-decoration: none;
+}
+
 #divBoton {
 	width: 100%;
 	height:150px;
 	display: block;
 	margin:50px;
 }
-#botonInicio{
-	width: 150px;
-	height: 50px;
-/* 	margin-top: 20px; */
-}
 div {
     width: 20%;
-    border-radius: 15px;
+    border-radius: 10px;
     height : 150px;
 
 }
 
- div:hover  {
-	opacity: 0.8;
+/*  div:hover  { */
+/* 	opacity: 0.8; */
+/* } */
+
+/* Trim */
+.hvr-trim {
+  display: inline-block;
+  vertical-align: middle;
+  -webkit-transform: translateZ(0);
+  transform: translateZ(0);
+  box-shadow: 0 0 1px rgba(0, 0, 0, 0);
+  -webkit-backface-visibility: hidden;
+  backface-visibility: hidden;
+  -moz-osx-font-smoothing: grayscale;
+  position: relative;
+}
+.hvr-trim:before {
+  content: '';
+  position: absolute;
+  border: white solid 4px;
+  top: 4px;
+  left: 4px;
+  right: 4px;
+  bottom: 4px;
+  opacity: 0;
+  -webkit-transition-duration: 0.3s;
+  transition-duration: 0.3s;
+  -webkit-transition-property: opacity;
+  transition-property: opacity;
+}
+.hvr-trim:hover:before, .hvr-trim:focus:before, .hvr-trim:active:before {
+  opacity: 1;
 }
 
 .fila1{

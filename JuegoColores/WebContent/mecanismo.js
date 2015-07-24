@@ -1,8 +1,8 @@
 
-
 var celdasSelect = 0;
 var idCeldaSelect;
 var parejaCeldaSelect;
+var totalCeldas = 20;
 
 function iniciarJuego(){
 	
@@ -83,16 +83,39 @@ function compararCelda (pareja, id){
 	else if (celdasSelect == 1){
 		if (parejaCeldaSelect == pareja && idCeldaSelect != id) {
 			var celdaSelect1 = document.getElementById(idCeldaSelect);
-			celdaSelect1.style.backgroundColor = "black";
-			celdaSelect1.style.opacity = "1";
+//			celdaSelect1.style.backgroundColor = "black";
+			celdaSelect1.style.opacity = "0";
 			
 			var celdaSelect2 = document.getElementById(id);
-			celdaSelect2.style.backgroundColor = "black";
-			celdaSelect2.style.opacity = "1";
+//			celdaSelect2.style.backgroundColor = "black";
+			celdaSelect2.style.opacity = "0";
 			
 			celdasSelect = 0;
 			idCeldaSelect = -1;
 			parejaCeldaSelect = -1;
+			totalCeldas = totalCeldas-2;
+			if (totalCeldas == 0) {
+//				var otraPartida = confirm("¿Quieres jugar otra vez?");
+//				if (otraPartida){
+//					location.reload();
+//				}else{
+//					alert("¡Ciao bacalao!");
+//					window.location.assign("http://www.nooooooooooooooo.com/");
+//				}
+				swal({   title: '¡Enhorabuena!',   text: '¿Quieres volver a empezar?',
+					type: 'success',   showCancelButton: true,   confirmButtonColor: '#DD6B55',
+					confirmButtonText: 'Sí, ¡otra partidita!',   cancelButtonText: 'No, me las piro.',   
+					closeOnConfirm: false,   closeOnCancel: false }, 
+					function(isConfirm){ 
+						if (isConfirm) { 
+							location.reload();
+						} 
+						else {
+							window.location.assign("http://www.nooooooooooooooo.com/");
+						}
+					}
+				);
+			}
 		}
 		else{
 			celdasSelect = 0;
@@ -104,4 +127,5 @@ function compararCelda (pareja, id){
 		}
 		
 	}
+	
 }
