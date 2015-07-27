@@ -2,17 +2,27 @@
 var celdasSelect = 0;
 var idCeldaSelect;
 var parejaCeldaSelect;
-var totalCeldas = 20;
+var contador = 0;
+
+var temp;
+
 
 function iniciarJuego(){
 	
-	var tabla = document.getElementById("marco");
-	tabla.removeAttribute("style");
+	var tablero = document.getElementById("marco");
+	tablero.style.visibility = "visible";
 	
 	var divBoton = document.getElementById("divBoton");
 	divBoton.setAttribute("style","display:none")
 	
+	var botonReinicio = document.getElementById("reinicio");
+	botonReinicio.style.visibility = "visible";	
+	
+	var reloj = document.getElementById("reloj");
+	reloj.style.visibility = "visible";
+	
 	colorearCeldas();
+	empezar();
 }
 
 function colorAleatorio(){
@@ -58,7 +68,7 @@ function colorearCeldas(){
 		var par2 = celdas[aleatorio2];
 		celdas.splice(aleatorio2, 1);
 		
-		var color = colorAleatorio();
+		var color = colorAleatorio() ;
 		
 		par1.style.backgroundColor = color;
 		var id1 = par1.getAttribute("id");
@@ -72,7 +82,7 @@ function colorearCeldas(){
 }
 
 function compararCelda (pareja, id){
-	
+	var resultado = document.getElementById("tiempoFin");
 	if (celdasSelect == 0){
 		var celdaSelect1 = document.getElementById(id);
 		celdaSelect1.style.opacity = "0.7"; 
@@ -83,38 +93,27 @@ function compararCelda (pareja, id){
 	else if (celdasSelect == 1){
 		if (parejaCeldaSelect == pareja && idCeldaSelect != id) {
 			var celdaSelect1 = document.getElementById(idCeldaSelect);
-//			celdaSelect1.style.backgroundColor = "black";
 			celdaSelect1.style.opacity = "0";
+			celdaSelect1.removeAttribute("onclick");
 			
 			var celdaSelect2 = document.getElementById(id);
-//			celdaSelect2.style.backgroundColor = "black";
 			celdaSelect2.style.opacity = "0";
+			celdaSelect2.removeAttribute("onclick");
 			
 			celdasSelect = 0;
 			idCeldaSelect = -1;
 			parejaCeldaSelect = -1;
-			totalCeldas = totalCeldas-2;
-			if (totalCeldas == 0) {
-//				var otraPartida = confirm("¿Quieres jugar otra vez?");
-//				if (otraPartida){
-//					location.reload();
-//				}else{
-//					alert("¡Ciao bacalao!");
-//					window.location.assign("http://www.nooooooooooooooo.com/");
-//				}
-				swal({   title: '¡Enhorabuena!',   text: '¿Quieres volver a empezar?',
-					type: 'success',   showCancelButton: true,   confirmButtonColor: '#DD6B55',
-					confirmButtonText: 'Sí, ¡otra partidita!',   cancelButtonText: 'No, me las piro.',   
-					closeOnConfirm: false,   closeOnCancel: false }, 
-					function(isConfirm){ 
-						if (isConfirm) { 
-							location.reload();
-						} 
-						else {
-							window.location.assign("http://www.nooooooooooooooo.com/");
-						}
-					}
-				);
+			contador++;
+
+			if (contador == 10) {
+				clearInterval(cronometro);
+				var reloj = document.getElementById("reloj");
+				reloj.className = "blink_me";
+				setInterval(blinker, 1000);
+				$("#marco").remove();
+				document.getElementById("botonFin").style.visibility = "visible";
+				$("#reinicio").remove();
+				
 			}
 		}
 		else{
@@ -128,4 +127,40 @@ function compararCelda (pareja, id){
 		
 	}
 	
+}
+
+function empezar() { //función del temporizador
+	   emp = new Date();
+	   cronometro = setInterval(tiempo, 10);
+}
+	
+
+
+function tiempo (){
+	var visor = document.getElementById("reloj");
+    actual=new Date(); //fecha a cada instante
+    //tiempo del crono (cro) = fecha instante (actual) - fecha inicial (emp)
+	 cro=actual- emp; //milisegundos transcurridos.
+	 cr=new Date(); //pasamos el num. de milisegundos a objeto fecha.
+	 cr.setTime(cro); 
+	    //obtener los distintos formatos de la fecha:
+	 cs=cr.getMilliseconds(); //milisegundos 
+	 cs=cs/10; //paso a centésimas de segundo.
+	 cs=Math.round(cs); //redondear las centésimas
+	 sg=cr.getSeconds(); //segundos 
+	 mn=cr.getMinutes(); //minutos 
+	 ho=cr.getHours()-1; //horas 
+	    //poner siempre 2 cifras en los números		 
+	 if (cs<10) {cs="0"+cs;} 
+	 if (sg<10) {sg="0"+sg;} 
+	 if (mn<10) {mn="0"+mn;} 
+	    //llevar resultado al visor.		 
+	 temp = ho+" "+mn+" "+sg+" "+cs;
+	 visor.innerHTML= temp;
+	
+}
+
+function blinker() {
+    $('.blink_me').fadeOut(500);
+    $('.blink_me').fadeIn(500);
 }
