@@ -4,8 +4,51 @@ var idCeldaSelect;
 var parejaCeldaSelect;
 var contador = 0;
 
+var nombre;
 var temp;
 
+var xmlHttp = new XMLHttpRequest();
+
+function llamadaRest()
+{
+	xmlHttp.onreadystatechange = procesarEvento;
+	xmlHttp.open('GET', '../tiempofinal?tiempo='+temp+'&nombre='+nombre , true);
+	xmlHttp.setRequestHeader('Accept', 'application/json');
+	xmlHttp.send(null);
+	
+}
+function procesarEvento()
+{
+   
+  if(xmlHttp.readyState==4) //ya hemos recibido respuesta del servidor
+  {
+      if(xmlHttp.status==200)// y el código de la cabecera http es bueno
+          {
+    	  	mostrarListado(xmlHttp.responseText);
+          }
+      else
+      {
+          alert("Ha ocurrido un error"+ xmlHttp.status +":"+ xmlHttp.statusText);
+      }
+  }
+
+}
+
+function mostrarListado(texto)
+{
+	var listado = JSON.parse(xmlHttp.responseText);
+	
+	listado.sort(function(b,a){return a.tiempo-b.tiempo});
+	
+	var resultado ='';
+	
+	for (var i = 0; i<listado.length; i++){
+		resultado = listado[i].nombre +' ha tardado '+ listado[i].tiempo +'\n'+ resultado;
+	}
+	
+	alert(resultado);
+	
+}
 
 function iniciarJuego(){
 	
@@ -113,7 +156,8 @@ function compararCelda (pareja, id){
 				$("#marco").remove();
 				document.getElementById("botonFin").style.visibility = "visible";
 				$("#reinicio").remove();
-				
+				nombre = prompt('&iquest;C&oacute;mo te llamas?','');
+				llamadaRest();
 			}
 		}
 		else{
